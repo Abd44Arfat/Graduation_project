@@ -12,7 +12,7 @@ app.use('/dectionary',dectionaryRouter)
 app.use('/result',resultRouter)
 app.use('/auth',userRouter)
 
-
+    
 
 
 
