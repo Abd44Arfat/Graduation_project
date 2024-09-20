@@ -1,5 +1,5 @@
 import { Dectionary } from "../../../DB/models/dectionary/dectionary.schema.js"
-
+import jwt from 'jsonwebtoken'
 
 
 const addDectionary =async(req,res)=>{
@@ -10,8 +10,13 @@ const addDectionary =async(req,res)=>{
 
 
 const getAllDectionaries =async(req,res)=>{
-    let dectionaries =await Dectionary.find()
-    res.json({message:"all dectionaries : .. ", dectionaries})
+    let {token} =req.headers
+    jwt.verify(token,'3mkDarsh',async (err,decoded)=>{
+        if(err) return res.status(401).json({message:"Invalid Token .."})
+
+            let dectionaries =await Dectionary.find()
+            res.json({message:"all dectionaries : .. ", dectionaries})
+        })
 }
 
 

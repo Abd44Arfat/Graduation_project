@@ -1,5 +1,5 @@
 import { Result } from "../../../DB/models/result/result.schema.js"
-
+import jwt from 'jsonwebtoken'
 
 
 
@@ -12,8 +12,13 @@ const addResult =async(req,res)=>{
     
     
     const getAllResults =async (req,res)=>{
-        let results =await Result.find()
-        res.status(200).json({message:"All results : ", results })
+        let {token}= req.headers
+        jwt.verify(token,'3mkDarsh',async (err,decoded)=>{
+            if(err) return res.status(401).json({message:"Invalid Token.. "})
+
+                let results =await Result.find()
+                res.status(200).json({message:"All results : ", results })
+        })
         
         }
     
