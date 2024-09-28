@@ -8,7 +8,7 @@ import { AppError } from '../../utils/appError.js'
 
 const signup =catchError( async(req,res)=>{
     let user =await User.insertMany(req.body)
-    user[0].password = undefined
+    user[0].password = undefined1
     res.status(201).json({message:"User Created ..",user})
 })
 
