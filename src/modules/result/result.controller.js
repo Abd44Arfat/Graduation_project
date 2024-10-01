@@ -17,7 +17,7 @@ const addResult =catchError(  async(req,res)=>{
         let {token}= req.headers
         jwt.verify(token,'3mkDarsh',async (err,decoded)=>{
             // if(err) return res.status(401).json({message:"Invalid Token.. "})
-            if(err) return next(new AppError('Invalid Token.. ',401))
+            if(err) return next(new AppError('Invalid Token.. ',401)) 
 
                 let results =await Result.find()
                 res.status(200).json({message:"All results : ", results })

@@ -16,8 +16,11 @@ const getAllDectionaries = catchError( async(req,res,next)=>{
     jwt.verify(token,'3mkDarsh',async (err,decoded)=>{
         // if(err) return res.status(401).json({message:"Invalid Token .."})
         if(err) return next(new AppError('Invalid Token ..',401))
-
-            let dectionaries =await Dectionary.find()
+            let pageNumber =req.quary.page * 1 || 1
+            if(pageNumber < 1) pageNumber=1 
+            const limit = 5 
+            let skip =(pageNumber - 1) * limit 
+            let dectionaries =await Dectionary.find().skip(skip).limit(limit)
             res.json({message:"all dectionaries : .. ", dectionaries})
         })
 }
