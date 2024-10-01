@@ -18,7 +18,7 @@ const getAllDectionaries = catchError( async(req,res,next)=>{
         if(err) return next(new AppError('Invalid Token ..',401))
             let pageNumber =req.quary.page * 1 || 1
             if(pageNumber < 1) pageNumber=1 
-            const limit = 5 
+            const limit = 10
             let skip =(pageNumber - 1) * limit 
             let dectionaries =await Dectionary.find().skip(skip).limit(limit)
             res.json({message:"all dectionaries : .. ", dectionaries})
