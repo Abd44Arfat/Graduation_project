@@ -17,10 +17,13 @@ let user = await User.findById(req.params.id)
     res.status(201).json({message:"User ---->" , user})
 })
 
-const updateUser =catchError( async(req,res)=>{
-    let newUser = await User.findByIdAndUpdate(req.params.id , req.body , {new:true})
-        res.status(200).json({message:"User Updated ---->", newUser})
-    })  
+const updateUser =catchError( async (req,res,next)=>{
+    let user = await User.findByIdAndUpdate(req.params.id,req.body,{new:true})
+    user || next(new AppError('User Not found',404))
+    !user || res.json({message:"Success ..", user})
+})
+
+
 
 const signup =catchError( async(req,res)=>{
     let user =new User(req.body)
