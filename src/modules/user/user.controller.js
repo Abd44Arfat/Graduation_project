@@ -61,24 +61,6 @@ const changeUserPassword =catchError( async(req,res,next)=>{
 
 
 
-    const protectRouters=catchError(async(req,res,next)=>{
-let {token} =req.headers
-let userPyload =null 
-if(!token) return next(new AppError('Token not provided',401))
-    jwt.verify(token,'3mkDarsh',(err,pyload)=>{
-if(err) return next(new AppError(err,401))
-    console.log(pyload);
-    
-userPyload=pyload
-    })
-let user =await User.findById(userPyload.userId)
-if(!user) return next(new AppError('user not found',401))
-let time = parseInt(user?.passwordChangedAt.getTime()/1000)
-if(time < userPyload.iat) return next(new AppError('invalid token .. login again',401))
-req.user=user
-next()
-    })
-
 
 
 export {
@@ -86,7 +68,6 @@ export {
     signin,
     changeUserPassword,
     getallUsers,
-    protectRouters,
     getUser,
     updateUser
 }

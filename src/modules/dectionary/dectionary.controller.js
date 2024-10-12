@@ -11,14 +11,13 @@ const addDectionary = catchError( async(req,res)=>{
 })
 
 
-
 const getAllDectionaries = catchError( async(req,res,next)=>{
     let {token} =req.headers
     jwt.verify(token,'3mkDarsh',async (err,decoded)=>{
         if(err) return next(new AppError('Invalid Token ..',401))
-            let apiFeatures =new ApiFeatures(Dectionary.find(),req.query)
+            let apiFeatures =new ApiFeatures(Dectionary.find(),req.query).pagination()
             let dectionaries =await apiFeatures.mongooseQuery
-            res.json({message:"all dectionaries : .. ", dectionaries})
+            res.json({message:"all dectionaries : .. ",page:apiFeatures.pageNumber,dectionaries})
         })
 }
 )
