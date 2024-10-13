@@ -26,10 +26,8 @@ const updateUser =catchError( async (req,res,next)=>{
 
 
 const signup =catchError( async(req,res)=>{
-    let user =new User(req.body)
-    await user.save()
-    user[0].password = undefined
-    res.status(201).json({message:"User Created .." , user})
+    let user = await User.insertMany(req.body)
+    res.status(201).json({message:'Created..',user})
 })
 
 
