@@ -1,5 +1,4 @@
-import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
+
 import { User } from '../../../DB/models/user/user.schema.js'
 import { catchError } from '../../middlewares/catchError.js'
 import { AppError } from '../../utils/appError.js'
@@ -23,49 +22,18 @@ const updateUser =catchError( async (req,res,next)=>{
     !user || res.json({message:"Success ..", user})
 })
 
-
-
-const signup =catchError( async(req,res)=>{
-    let user = await User.insertMany(req.body)
-    res.status(201).json({message:'Created..',user})
+const deleteUser =catchError( async (req,res,next)=>{
+    let user = await User.findByIdAndDelete(req.params.id)
+    user || next(new AppError('User Not found',404))
+    !user || res.json({message:"Success ..", user})
 })
-
-
-
-const signin =catchError( async(req,res,next)=>{
-    let user =await User.findOne({email : req.body.email})
-    if(!user) return next(new AppError('Email or Password incorrect ..',404))
-
-    let match = bcrypt.compareSync(req.body.password , user.password )
-    if(!match) return next(new AppError('Email or Password incorrect ..',404))
-
-jwt.sign({userId:user._id , name:user.name, role:user.role }, '3mkDarsh' , (err,token)=>{
-    res.status(200).json({message:"Login Successfully  ..", token}  )
-})})
-    
-
-const changeUserPassword =catchError( async(req,res,next)=>{
-    let user =await User.findOne({email : req.body.email})
-    if(!user) return next(new AppError('Email or Password incorrect ..',404))
-    let match = bcrypt.compareSync(req.body.oldPassword , user.password )
-    if(!match) return next(new AppError('Email or Password incorrect ..',404))
-
-    await User.findOneAndUpdate({email : req.body.email},{password: req.body.newPassword , passwordChangedAt:Date.now()})
-    jwt.sign({userId:user._id , name:user.name, role:user.role }, '3mkDarsh' , (err,token)=>{
-            res.status(200).json({message:"Login Successfully  ..", token, user}  )
-        })
-    })
-
-
 
 
 
 
 export {
-    signup,
-    signin,
-    changeUserPassword,
     getallUsers,
     getUser,
-    updateUser
+    updateUser,
+    deleteUser
 }
