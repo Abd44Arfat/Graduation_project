@@ -21,8 +21,8 @@ const signin =catchError( async(req,res,next)=>{
     let match = bcrypt.compareSync(req.body.password , user.password )
     if(!match) return next(new AppError('Email or Password incorrect ..',404))
 
-jwt.sign({userId:user._id , name:user.name, role:user.role }, '3mkDarsh' , (err,token)=>{
-    res.status(200).json({message:"Login Successfully  ..", token}  )
+jwt.sign({userId:user._id , name:user.name, role:user.role }, process.env.SECRET_KEY , (err,token)=>{
+    res.status(200).json({message:"Login Successfully  ..", token, user }  )
 })})
     
 
@@ -33,7 +33,7 @@ const changeUserPassword =catchError( async(req,res,next)=>{
     if(!match) return next(new AppError('Email or Password incorrect ..',404))
 
     await User.findOneAndUpdate({email : req.body.email},{password: req.body.newPassword , passwordChangedAt:Date.now()})
-    jwt.sign({userId:user._id , name:user.name, role:user.role }, '3mkDarsh' , (err,token)=>{
+    jwt.sign({userId:user._id , name:user.name, role:user.role }, process.env.SECRET_KEY , (err,token)=>{
             res.status(200).json({message:"Login Successfully  ..", token, user}  )
         })
     })
@@ -43,7 +43,7 @@ const protectedRouter=catchError(async (req,res,next)=>{
     let {token}= req.headers
     let userPayload= null
     if(!token) return next(new AppError('Token not provided..',401))
-        jwt.verify(token,'3mkDarsh',(err,payload)=>{
+        jwt.verify(token,process.env.SECRET_KEY,(err,payload)=>{
     if(err) return next(new AppError(err,401))
         userPayload=payload
         })
