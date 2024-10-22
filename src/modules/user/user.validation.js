@@ -5,7 +5,7 @@ const signupVal= joi.object({
     email:joi.string().email().required(),
     password:joi.string().min(7).max(40).pattern(/^[A-Za-z][A-Za-z0-9]{7,39}$/).required(),
     repassword:joi.valid(joi.ref('password')).required(),
-    role:joi.string().required()
+    role:joi.string()
 })
 
 
