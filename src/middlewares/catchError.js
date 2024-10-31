@@ -1,8 +1,5 @@
 
-export function catchError(fn){
-    return (req,res,next)=>{
-    fn(req,res,next).catch((err)=>{
-        res.json(err)
-    })
-    }
-    }
+export const catchError = (fn) => (req, res, next) => {
+    return Promise.resolve(fn(req, res, next))
+        .catch(next); // Pass errors to the error handling middleware
+};
