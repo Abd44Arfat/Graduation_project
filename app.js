@@ -15,8 +15,6 @@ app.use(express.json())
 app.use(cors())
 bootstrap(app)
 
-console.log("Fuck ahmed ali");
-
 
 //! for unfound Routes 
 app.use('*',(req,res,next)=>{
