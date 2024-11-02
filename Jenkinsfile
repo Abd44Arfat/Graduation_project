@@ -8,11 +8,21 @@ pipeline {
             }
         }
 
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    // Install dependencies
+                    sh 'npm install'
+                }
+            }
+        }
+
         stage('Test') {
             steps {
-                sh 'sudo apt install npm'
-                    
-                
+                script {
+                    // Run tests
+                    sh 'npm test'
+                }
             }
         }
 
@@ -20,7 +30,7 @@ pipeline {
             steps {
                 script {
                     // Run the build process
-                    sh 'node app.js'
+                    sh 'npm run build'
                 }
             }
         }
