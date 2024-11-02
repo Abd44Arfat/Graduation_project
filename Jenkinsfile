@@ -36,16 +36,6 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                script {
-                    // Run the build process
-                    sh 'npm run build'
-                }
-            }
-        }
-    }
-
     post {
         success {
             echo 'Pipeline completed successfully!'
