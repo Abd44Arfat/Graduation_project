@@ -8,10 +8,8 @@ pipeline {
                     // Check if Git is installed
                     def gitInstalled = sh(script: 'git --version', returnStatus: true)
                     if (gitInstalled != 0) {
-                        // Install Git if it's not found
-                        echo 'Git is not installed. Installing Git...'
-                        sh 'sudo apt-get update && sudo apt-get install -y git' // For Debian/Ubuntu
-                        // For other systems, replace with the appropriate package manager commands
+                        // Handle the case where Git is not installed
+                        error 'Git is not installed. Please install Git on the Jenkins agent.'
                     } else {
                         echo 'Git is already installed.'
                     }
@@ -25,16 +23,27 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Install Node.js and npm') {
             steps {
                 script {
+                    // Check if Node.js is installed
+                    def nodeInstalled = sh(script: 'node -v', returnStatus: true)
+                    if (nodeInstalled != 0) {
+                        error 'Node.js is not installed. Please install Node.js on the Jenkins agent.'
+                    }
+
+                    // Check if npm is installed
+                    def npmInstalled = sh(script: 'npm -v', returnStatus: true)
+                    if (npmInstalled != 0) {
+                        error 'npm is not installed. Please install npm on the Jenkins agent.'
+                    }
+
                     // Install dependencies
-                    sh ' apt update'
-                    sh ' apt install -y nodejs npm'
-                    
+                    sh 'npm install'
                 }
             }
         }
+    }
 
     post {
         success {
