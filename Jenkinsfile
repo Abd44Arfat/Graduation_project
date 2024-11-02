@@ -45,6 +45,19 @@ pipeline {
         }
     }
 
+    stage('build') { // Renamed stage name for clarity
+      steps {
+        // Assuming you have added Docker credentials in Jenkins with ID 'docker-credentials-id'
+        withCredentials([usernamePassword(credentialsId: 'docker-hup', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+          sh 'docker build -f dockerfile . -t abdelrahman645/jenkins_nodejs:v3.0'
+          sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
+          sh 'docker push abdelrahman645/jenkins_nodejs:v3.0'
+          
+        }
+      }
+    }
+
+
     post {
         success {
             echo 'Pipeline completed successfully!'
