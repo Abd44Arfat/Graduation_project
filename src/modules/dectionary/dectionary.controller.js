@@ -5,7 +5,7 @@ import { AppError } from "../../utils/appError.js"
 import { ApiFeatures } from "../../utils/apiFeature.js"
 
 
-const addDectionary = catchError( async(req,res)=>{
+const addDectionary = catchError( async(req,res,next)=>{
     let dectionary =await Dectionary.insertMany(req.body)
     res.json({message:"Created .. ", dectionary})
 })
