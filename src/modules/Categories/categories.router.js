@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import { addCategory, deleteCategory, getAllCategorys } from './categories.controller.js'
+import { addCategory, deleteCategory, getAllCategorys, getOneCategory } from './categories.controller.js'
 const  CategoryRouter= Router()
 
 
@@ -7,6 +7,7 @@ const  CategoryRouter= Router()
 CategoryRouter.post('/',addCategory)
 CategoryRouter.get('/',getAllCategorys)
 CategoryRouter.delete('/:id',deleteCategory)
+CategoryRouter.get('/:id',getOneCategory)
 
 
 
