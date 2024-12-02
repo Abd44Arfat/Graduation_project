@@ -6,7 +6,7 @@ import { AppError } from '../../utils/appError.js'
 
 
 
-const signup =catchError( async(req,res)=>{
+const signup =catchError( async(req,res,next)=>{
     let user = new User(req.body)
     await user.save()
     res.status(201).json({message:"User Created .." , user})
