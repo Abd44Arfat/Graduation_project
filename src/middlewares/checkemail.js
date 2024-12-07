@@ -1,6 +1,5 @@
 import bcrypt from "bcrypt"
-import { User } from "../../DB/models/user/user.schema.js"
-
+import { User } from "../../DB/models/user.schema.js"
 
 export const checkEmail=async(req,res,next)=>{
     let isFound =await User.findOne({email:req.body.email})

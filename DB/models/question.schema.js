@@ -1,23 +1,21 @@
-import mongoose, { Schema, model } from 'mongoose'
+import mongoose, { Schema, Types, model } from 'mongoose'
 
 
 const schema = new Schema ({
     signs:{
-        gifUrl:String,
-        title:String
+    gifUrl:String,
+    text:String
     },
 question:{type:String, required:true},
-Answers:[
+options:[
     {
-        text:{type:String, required:true},
-        Score:{type:Number,
-            min:0, max:10 ,
-            default:0
-        },
+        text:{type:String, required:true}
     }
-]
+],
+correctOption:{type:String},
+points:{type:Number, min:0, max:10, default:0}
 },{
-    timestamps:false,
+    timestamps:true,
     versionKey:false
 })
 
@@ -32,5 +30,5 @@ Answers:[
 //     })
 
 
-export const Learn = model('Learn',schema)
+export const Question = model('Question',schema)
 

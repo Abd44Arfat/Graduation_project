@@ -1,6 +1,5 @@
-import { Level } from '../../../DB/models/Categories/levels.schema.js'
 import { catchError } from "../../middlewares/catchError.js"
-
+import { Level } from '../../../DB/models/levels.schema.js'
 
 const addLevel =catchError(  async(req,res)=>{
     let level =await Level.insertMany(req.body)

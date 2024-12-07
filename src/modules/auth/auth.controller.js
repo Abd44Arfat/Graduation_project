@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
-import { User } from '../../../DB/models/user/user.schema.js'
 import { catchError } from '../../middlewares/catchError.js'
 import { AppError } from '../../utils/appError.js'
+import { User } from '../../../DB/models/user.schema.js'
 
 
 

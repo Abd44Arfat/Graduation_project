@@ -1,8 +1,8 @@
-import { Dectionary } from "../../../DB/models/dectionary/dectionary.schema.js"
 import jwt from 'jsonwebtoken'
 import { catchError } from "../../middlewares/catchError.js"
 import { AppError } from "../../utils/appError.js"
 import { ApiFeatures } from "../../utils/apiFeature.js"
+import { Dectionary } from '../../../DB/models/dectionary.schema.js'
 
 
 const addDectionary = catchError( async(req,res,next)=>{

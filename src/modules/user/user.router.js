@@ -4,10 +4,10 @@ import { deleteUser, getallUsers, getUser, updateUser } from './user.controller.
 
 const userRouter=Router()
 
-userRouter.get('/users',getallUsers)
-userRouter.get('/user/:id',getUser)
-userRouter.put('/user/:id',updateUser)
-userRouter.put('/user/:id',deleteUser)
+userRouter.get('/',getallUsers)
+userRouter.get('/:id',getUser)
+userRouter.put('/id',updateUser)
+userRouter.put('/:id',deleteUser)
 
 
 

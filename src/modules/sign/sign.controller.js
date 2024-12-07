@@ -1,6 +1,5 @@
-import { Sign } from "../../../DB/models/learn/sign.schema.js";
 import { catchError } from "../../middlewares/catchError.js";
-
+import { Sign } from '../../../DB/models/sign.schema.js'
 
 
 const AddSign =catchError(async(req,res,next)=>{

@@ -1,8 +1,7 @@
 import jwt from 'jsonwebtoken'
 import { catchError } from "../../middlewares/catchError.js"
 import { AppError } from "../../utils/appError.js"
-import { Category } from '../../../DB/models/Categories/category.schema.js'
-
+import { Category } from '../../../DB/models/category.schema.js'
 
 const addCategory =catchError(  async(req,res)=>{
     let category =await Category.insertMany(req.body)

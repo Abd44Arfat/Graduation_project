@@ -1,5 +1,5 @@
 
-import { User } from '../../../DB/models/user/user.schema.js'
+import { User } from '../../../DB/models/user.schema.js'
 import { catchError } from '../../middlewares/catchError.js'
 import { AppError } from '../../utils/appError.js'
 import { ApiFeatures } from '../../utils/apiFeature.js'

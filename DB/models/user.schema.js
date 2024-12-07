@@ -5,20 +5,35 @@ name:String,
 email:String,
 password:String,
 confirmEmail:{
-    type:Boolean,
+    type:Boolean,   
     default:false
+  //const randomNumber = Math.floor(Math.random() * 10000);
+// console.log(randomNumber);
 }, 
 passwordChangedAt: Date ,
 role:{
     type:String,
     enum:['admin','user'],
     default:'user'
+},
+profile_Picture:String ,
+user_points:{
+    type:Number,
+    default:0
+},
+isActive:{
+    type:Boolean,
+},
+level_id:{
+    type:Schema.Types.ObjectId,
+    ref:'Level'
 }
 
+
 },{
-    timestamps:false,
+    timestamps:true,
     versionKey:false,
-})
+})  
 
 // schema.pre('insertMany',function(){
 //     this.password=bcrypt.hashSync(this.password,8)
