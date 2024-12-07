@@ -2,6 +2,7 @@ import mongoose, { Schema, Types, model } from 'mongoose'
 
 
 const schema = new Schema ({
+    level:{type:Types.ObjectId, ref:"Level"},
     signs:{
     gifUrl:String,
     text:String
@@ -9,11 +10,11 @@ const schema = new Schema ({
 question:{type:String, required:true},
 options:[
     {
-        text:{type:String, required:true}
+        text:{type:String, required:true},
+        score:{type:Number, min:0, max:10, default:0}
     }
 ],
 correctOption:{type:String},
-points:{type:Number, min:0, max:10, default:0}
 },{
     timestamps:true,
     versionKey:false

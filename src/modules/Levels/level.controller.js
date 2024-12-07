@@ -1,6 +1,5 @@
 import { catchError } from "../../middlewares/catchError.js"
-import { Level } from '../../../DB/models/levels.schema.js'
-
+import {Level} from '../../../DB/models/levels.schema.js'
 const addLevel =catchError(  async(req,res)=>{
     let level =await Level.insertMany(req.body)
     res.status(200).json({message:"Created..", level })

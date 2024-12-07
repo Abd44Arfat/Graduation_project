@@ -14,7 +14,7 @@ category:{type:mongoose.Types.ObjectId,
 
 
 schema.virtual('Questions', {
-    ref:"Learn",
+    ref:"Question",
     localField:"_id",
     foreignField:"level"
 })
