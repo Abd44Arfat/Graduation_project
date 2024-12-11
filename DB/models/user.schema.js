@@ -23,8 +23,9 @@ user_points:{
 },
 isActive:{
     type:Boolean,
+    default:false
 },
-level_id:{
+level:{
     type:Schema.Types.ObjectId,
     ref:'Level'
 }
@@ -38,6 +39,10 @@ level_id:{
 // schema.pre('insertMany',function(){
 //     this.password=bcrypt.hashSync(this.password,8)
 // })
+
+schema.post('init',function (doc){
+    if(doc.profile_Picture) doc.profile_Picture = "http://localhost:3000/uploads/user/" + doc.profile_Picture
+    })
 
 schema.pre('findOneAndUpdate',function(){
     if(this._update.password)  this._update.password =bcrypt.hashSync(this._update.password , 8)

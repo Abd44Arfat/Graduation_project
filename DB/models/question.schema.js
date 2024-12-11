@@ -6,15 +6,23 @@ const schema = new Schema ({
     signs:{
     gifUrl:String,
     text:String
-    },
+    },  
+    type: { // Question types
+        type: String,
+        required: true,
+        enum: ['MCQ', 'True or False']},
 question:{type:String, required:true},
 options:[
     {
-        text:{type:String, required:true},
+        text:String,
         score:{type:Number, min:0, max:10, default:0}
     }
 ],
-correctOption:{type:String},
+correctOption:{ type: mongoose.Schema.Types.Mixed, // String for MCQ, Boolean for T/F
+    required: true,},
+
+
+
 },{
     timestamps:true,
     versionKey:false
