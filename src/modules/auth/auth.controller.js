@@ -6,7 +6,7 @@ import { User } from '../../../DB/models/user.schema.js'
 
 
 
-const signup =catchError( async(req,res,next)=>{
+const signup =catchError( async(req,res,next)=>{    
     req.body.profile_Picture=req.file.filename
     let user = new User(req.body)
     await user.save()

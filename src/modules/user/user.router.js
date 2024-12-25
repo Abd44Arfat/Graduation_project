@@ -7,8 +7,8 @@ const userRouter=Router()
 
 userRouter.get('/',getallUsers)
 userRouter.get('/:id',getUser)
-userRouter.put('/id',uploadSinleFile('image','user'),updateUser)
-userRouter.put('/:id',deleteUser)
+userRouter.put('/:id',uploadSinleFile('image','user'),updateUser)
+userRouter.delete('/:id',deleteUser)
 
 
 

@@ -17,8 +17,8 @@ let user = await User.findById(req.params.id)
 })
 
 const updateUser =catchError( async (req,res,next)=>{
-    req.body.profile_Picture=req.file.filename
-    let user = await User.findByIdAndUpdate(req.params.id,req.body,{new:true})
+    if(req.body.profile_Picture) req.body.profile_Picture=req.file.filename
+    let user = await User.findByIdAndUpdate(req.params.id, req.body,{new:true})
     user || next(new AppError('User Not found',404))
     !user || res.json({message:"Success ..", user})
 })
