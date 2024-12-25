@@ -4,7 +4,6 @@ import { catchError } from '../../middlewares/catchError.js'
 import { AppError } from '../../utils/appError.js'
 import { ApiFeatures } from '../../utils/apiFeature.js'
 
-
 const getallUsers =catchError( async(req,res)=>{
     let apiFeatures =new ApiFeatures(User.find(),req.query)
             let users =await apiFeatures.mongooseQuery
@@ -28,9 +27,6 @@ const deleteUser =catchError( async (req,res,next)=>{
     user || next(new AppError('User Not found',404))
     !user || res.json({message:"Success ..", user})
 })
-
-
-
 
 export {
     getallUsers,

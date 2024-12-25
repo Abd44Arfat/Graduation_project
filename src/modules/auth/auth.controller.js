@@ -4,16 +4,12 @@ import { catchError } from '../../middlewares/catchError.js'
 import { AppError } from '../../utils/appError.js'
 import { User } from '../../../DB/models/user.schema.js'
 
-
-
 const signup =catchError( async(req,res,next)=>{    
     req.body.profile_Picture=req.file.filename
     let user = new User(req.body)
     await user.save()
     res.status(201).json({message:"User Created .." , user})
 })
-
-
 
 const signin =catchError( async(req,res,next)=>{
     let user =await User.findOne({email : req.body.email})
@@ -26,7 +22,6 @@ jwt.sign({userId:user._id , name:user.name, role:user.role }, process.env.SECRET
     res.status(200).json({message:"Login Successfully  ..", token, user }  )
 })})
     
-
 const changeUserPassword =catchError( async(req,res,next)=>{
     let user =await User.findOne({email : req.body.email})
     if(!user) return next(new AppError('Email or Password incorrect ..',404))
@@ -38,7 +33,6 @@ const changeUserPassword =catchError( async(req,res,next)=>{
             res.status(200).json({message:"Login Successfully  ..", token, user}  )
         })
     })
-
 
 const protectedRouter=catchError(async (req,res,next)=>{
     let {token}= req.headers
@@ -58,7 +52,6 @@ if(time > userPayload.iat) return next(new AppError('invalid token,signin again.
 req.user=user
 next()                          
 })
-
 
 const allowTo =(...roles)=>{
     return catchError((req,res,next)=>{
