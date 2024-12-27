@@ -4,19 +4,12 @@ const schema= new Schema({
 name:String,
 email:String,
 password:String,
-confirmEmail:{
-    type:Boolean,   
-    default:false
-  //const randomNumber = Math.floor(Math.random() * 10000);
-// console.log(randomNumber);
-}, 
 passwordChangedAt: Date ,
 role:{
     type:String,
     enum:['admin','user'],
     default:'user'
 },
-profile_Picture:String ,
 user_points:{
     type:Number,
     default:0
