@@ -12,5 +12,5 @@ authRouter.post('/signup',Validate(signupVal),checkEmail,signup)
 authRouter.post('/signin',Validate(signinVal),signin)
 authRouter.patch('/changepassword',Validate(changePasswordVal),changeUserPassword)
 
-
+    
 export default authRouter   
