@@ -23,6 +23,17 @@ const addLevel =catchError(  async(req,res)=>{
                 })
 
 
+
+                const UpdateLevel =catchError(  async (req,res)=>{
+                    let level =await Level.findByIdAndUpdate(req.params.id,req.body,{new:true})
+                    res.status(200).json({message:"Deleted : ", level })
+                    
+                    })
+
+
+
+
+
         const deleteLevel =catchError(  async (req,res)=>{
             let level =await Level.findByIdAndDelete(req.params.id)
             res.status(200).json({message:"Deleted : ", level })
@@ -39,5 +50,6 @@ export {
     addLevel,
     deleteLevel, 
     getAllLevels,
-    getOnelevel
+    getOnelevel,
+    UpdateLevel
 }
